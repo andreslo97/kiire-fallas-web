@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "https://kiire-fallas-api.onrender.com";
 
 const ticketForm = document.getElementById("ticketForm");
 const mensaje = document.getElementById("mensaje");
