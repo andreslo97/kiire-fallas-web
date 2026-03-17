@@ -26,3 +26,7 @@ app.include_router(tickets_router)
 @app.get("/")
 def root():
     return {"message": "Kiire Fallas API funcionando correctamente"}
+
+@app.get("/healthz")
+def healthz():
+    return {"status": "ok"}
