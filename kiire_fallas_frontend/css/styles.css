@@ -64,9 +64,8 @@ body {
   min-height: 100vh;
   color: var(--text-main);
   background:
-    radial-gradient(circle at top left, rgba(182, 255, 59, 0.25), transparent 22%),
-    radial-gradient(circle at top right, rgba(29, 37, 84, 0.08), transparent 18%),
-    linear-gradient(180deg, #f8fbf7 0%, var(--bg-app) 100%);
+    linear-gradient(rgba(17, 24, 39, 0.45), rgba(17, 24, 39, 0.45)),
+    url("../img/kiire-fondo.png") center center / cover no-repeat fixed;
 }
 
 /* =========================
@@ -366,6 +365,8 @@ body {
 .table-wrapper {
   width: 100%;
   overflow-x: auto;
+  overflow-y: auto;
+  max-height: 520px;
   border: 1px solid #edf0f2;
   border-radius: 18px;
   background: #ffffff;
@@ -585,4 +586,10 @@ a:hover {
   .message {
     padding: 12px 14px;
   }
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
