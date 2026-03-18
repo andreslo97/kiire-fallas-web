@@ -107,3 +107,23 @@ function renderizarTickets(tickets) {
     ticketsBody.appendChild(tr);
   });
 }
+
+const filtroCodigoInput = document.getElementById("filtroCodigo");
+
+filtroCodigoInput.addEventListener("input", () => {
+  const filtro = filtroCodigoInput.value.toLowerCase();
+  const filas = document.querySelectorAll("#ticketsBody tr");
+
+  filas.forEach((fila) => {
+    const celdas = fila.querySelectorAll("td");
+    
+    // Columna "Código" (índice 1 según tu tabla)
+    const codigo = celdas[1]?.textContent.toLowerCase() || "";
+
+    if (codigo.includes(filtro)) {
+      fila.style.display = "";
+    } else {
+      fila.style.display = "none";
+    }
+  });
+});

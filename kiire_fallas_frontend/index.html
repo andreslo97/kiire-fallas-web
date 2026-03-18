@@ -113,7 +113,17 @@
           <h2 class="section-title">Tickets</h2>
           <p class="section-subtitle">Consulta y haz seguimiento a los casos registrados.</p>
         </div>
-        <button id="btnRecargar" type="button">Recargar</button>
+
+        <div style="display: flex; gap: 10px;">
+          <input
+            type="text"
+            id="filtroCodigo"
+            placeholder="Buscar por código..."
+            style="padding: 8px 12px; border-radius: 10px; border: 1px solid #d1d5db;"
+          />
+
+          <button id="btnRecargar" type="button">Recargar</button>
+        </div>
       </div>
 
       <div class="table-wrapper">
