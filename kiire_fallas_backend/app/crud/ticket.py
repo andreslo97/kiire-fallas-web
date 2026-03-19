@@ -1,11 +1,10 @@
+from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
 from app.models.ticket import Ticket
 from app.schemas.ticket import TicketUpdateEstado, TicketUpdateResponsable
 from app.services.ticket_code_service import generar_ticket_codigo
 
-
-from fastapi import HTTPException
 
 def crear_ticket(
     db: Session,
@@ -19,7 +18,6 @@ def crear_ticket(
     imagen_url: str | None = None,
 ) -> Ticket:
 
-    # 🔥 VALIDACIONES OBLIGATORIAS
     if not nombre_reportante or not nombre_reportante.strip():
         raise HTTPException(status_code=400, detail="El nombre del reportante es obligatorio")
 
@@ -41,7 +39,6 @@ def crear_ticket(
     if not descripcion or not descripcion.strip():
         raise HTTPException(status_code=400, detail="La descripción es obligatoria")
 
-    # 🔥 CREACIÓN DEL TICKET
     nuevo_ticket = Ticket(
         nombre_reportante=nombre_reportante.strip(),
         correo_reportante=correo_reportante.strip(),
@@ -50,7 +47,8 @@ def crear_ticket(
         categoria=categoria.strip(),
         prioridad=prioridad.strip(),
         descripcion=descripcion.strip(),
-        imagen_url=imagen_url,  # 👈 opcional
+        imagen_url=imagen_url,
+        observacion=None,
         responsable="Andrés Loaiza",
         correo_responsable="jloaiza037@grupo-exito.com",
         estado="Abierto",
@@ -60,7 +58,6 @@ def crear_ticket(
     db.commit()
     db.refresh(nuevo_ticket)
 
-    # 🔥 GENERAR CÓDIGO
     nuevo_ticket.ticket_codigo = generar_ticket_codigo(nuevo_ticket.id)
     db.commit()
     db.refresh(nuevo_ticket)

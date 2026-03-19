@@ -28,6 +28,7 @@ class Ticket(Base):
 
     descripcion = Column(Text, nullable=False)
     imagen_url = Column(Text, nullable=True)
+    observacion = Column(Text, nullable=True)
 
     responsable = Column(String(100), nullable=True)
     correo_responsable = Column(String(150), nullable=True)

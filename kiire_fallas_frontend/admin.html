@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kiire Fallas - Administración</title>
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Kiire Fallas - Administración</h1>
+      <p>Gestión interna de responsables</p>
+    </header>
+
+    <section class="card" id="loginCard">
+      <h2>Acceso administrador</h2>
+      <form id="adminLoginForm" class="form-grid">
+        <div class="form-group full-width">
+          <label for="adminPassword">Contraseña</label>
+          <input type="password" id="adminPassword" required />
+        </div>
+        <div class="form-actions full-width">
+          <button type="submit">Ingresar</button>
+        </div>
+      </form>
+      <div id="loginMensaje" class="message"></div>
+    </section>
+
+    <section class="card" id="adminPanel" style="display: none;">
+      <h2>Actualizar responsable</h2>
+      <form id="adminForm" class="form-grid">
+        <div class="form-group">
+          <label for="ticketId">ID del ticket</label>
+          <input type="number" id="ticketId" required />
+        </div>
+
+        <div class="form-group">
+          <label for="nuevoResponsable">Empleado responsable</label>
+          <input type="text" id="nuevoResponsable" required />
+        </div>
+
+        <div class="form-group full-width">
+          <label for="nuevoCorreoResponsable">Correo del responsable</label>
+          <input type="email" id="nuevoCorreoResponsable" required />
+        </div>
+
+        <div class="form-actions full-width">
+          <button type="submit">Guardar y notificar</button>
+        </div>
+      </form>
+
+      <div id="adminMensaje" class="message"></div>
+    </section>
+  </div>
+
+  <script src="./js/admin.js"></script>
+</body>
+</html>
