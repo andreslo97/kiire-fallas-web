@@ -92,6 +92,10 @@ def actualizar_estado(db: Session, ticket: Ticket, data: TicketUpdateEstado):
 def actualizar_responsable(db: Session, ticket: Ticket, data: TicketUpdateResponsable):
     ticket.responsable = data.responsable
     ticket.correo_responsable = data.correo_responsable
+
+    if data.observacion is not None:
+        ticket.observacion = data.observacion
+
     db.commit()
     db.refresh(ticket)
     return ticket

@@ -11,6 +11,7 @@ class TicketUpdateEstado(BaseModel):
 class TicketUpdateResponsable(BaseModel):
     responsable: str = Field(..., max_length=100)
     correo_responsable: EmailStr
+    observacion: Optional[str] = None
 
 
 class TicketResponse(BaseModel):
