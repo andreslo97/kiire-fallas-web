@@ -4,12 +4,21 @@ const ticketForm = document.getElementById("ticketForm");
 const mensaje = document.getElementById("mensaje");
 const ticketsBody = document.getElementById("ticketsBody");
 const btnRecargar = document.getElementById("btnRecargar");
+const filtroCodigo = document.getElementById("filtroCodigo");
+
+let ticketsCache = [];
 
 document.addEventListener("DOMContentLoaded", () => {
   cargarTickets();
 });
 
 btnRecargar.addEventListener("click", cargarTickets);
+
+if (filtroCodigo) {
+  filtroCodigo.addEventListener("input", () => {
+    aplicarFiltroCodigo();
+  });
+}
 
 ticketForm.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -62,11 +71,26 @@ async function cargarTickets() {
       throw new Error("No se pudieron cargar los tickets");
     }
 
-    const tickets = await response.json();
-    renderizarTickets(tickets);
+    ticketsCache = await response.json();
+    aplicarFiltroCodigo();
   } catch (error) {
     mostrarMensaje(error.message, "error");
   }
+}
+
+function aplicarFiltroCodigo() {
+  const valorFiltro = (filtroCodigo?.value || "").trim().toLowerCase();
+
+  if (!valorFiltro) {
+    renderizarTickets(ticketsCache);
+    return;
+  }
+
+  const ticketsFiltrados = ticketsCache.filter((ticket) =>
+    (ticket.ticket_codigo || "").toLowerCase().includes(valorFiltro)
+  );
+
+  renderizarTickets(ticketsFiltrados);
 }
 
 function renderizarTickets(tickets) {

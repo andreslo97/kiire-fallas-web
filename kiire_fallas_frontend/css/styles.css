@@ -593,3 +593,11 @@ thead th {
   top: 0;
   z-index: 2;
 }
+
+.filters {
+  margin-bottom: 16px;
+}
+
+.filter-group {
+  max-width: 320px;
+}
