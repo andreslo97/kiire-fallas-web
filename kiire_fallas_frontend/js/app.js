@@ -18,8 +18,9 @@ ticketForm.addEventListener("submit", async (event) => {
   formData.append("nombre_reportante", document.getElementById("nombre_reportante").value.trim());
   formData.append("correo_reportante", document.getElementById("correo_reportante").value.trim());
   formData.append("comercio", document.getElementById("comercio").value.trim());
+  formData.append("nit", document.getElementById("nit").value.trim());
   formData.append("titulo_error", document.getElementById("titulo_error").value.trim());
-  formData.append("categoria", document.getElementById("categoria").value.trim());
+  formData.append("producto", document.getElementById("producto").value);
   formData.append("prioridad", document.getElementById("prioridad").value);
   formData.append("descripcion", document.getElementById("descripcion").value.trim());
 
@@ -74,7 +75,7 @@ function renderizarTickets(tickets) {
   if (!tickets.length) {
     ticketsBody.innerHTML = `
       <tr>
-        <td colspan="10">No hay tickets registrados.</td>
+        <td colspan="12">No hay tickets registrados.</td>
       </tr>
     `;
     return;
@@ -87,7 +88,9 @@ function renderizarTickets(tickets) {
       <td>${ticket.id}</td>
       <td>${ticket.ticket_codigo ?? ""}</td>
       <td>${ticket.comercio ?? ""}</td>
+      <td>${ticket.nit ?? ""}</td>
       <td>${ticket.titulo_error ?? ""}</td>
+      <td>${ticket.producto ?? ""}</td>
       <td>${ticket.prioridad ?? ""}</td>
       <td>${ticket.responsable ?? ""}</td>
       <td>${ticket.correo_responsable ?? ""}</td>
@@ -99,31 +102,9 @@ function renderizarTickets(tickets) {
             : "Sin imagen"
         }
       </td>
-      <td>
-        <span style="color: #6b7280;">Sin acciones</span>
-      </td>
+      <td>${ticket.observacion ?? ""}</td>
     `;
 
     ticketsBody.appendChild(tr);
   });
 }
-
-const filtroCodigoInput = document.getElementById("filtroCodigo");
-
-filtroCodigoInput.addEventListener("input", () => {
-  const filtro = filtroCodigoInput.value.toLowerCase();
-  const filas = document.querySelectorAll("#ticketsBody tr");
-
-  filas.forEach((fila) => {
-    const celdas = fila.querySelectorAll("td");
-    
-    // Columna "Código" (índice 1 según tu tabla)
-    const codigo = celdas[1]?.textContent.toLowerCase() || "";
-
-    if (codigo.includes(filtro)) {
-      fila.style.display = "";
-    } else {
-      fila.style.display = "none";
-    }
-  });
-});

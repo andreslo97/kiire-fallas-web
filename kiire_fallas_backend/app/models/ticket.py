@@ -21,9 +21,10 @@ class Ticket(Base):
     correo_reportante = Column(String(150), nullable=False)
 
     comercio = Column(String(150), nullable=False)
+    nit = Column(String(50), nullable=False)
 
     titulo_error = Column(String(100), nullable=False)
-    categoria = Column(String(50), nullable=False)
+    producto = Column(String(50), nullable=False)
     prioridad = Column(String(20), nullable=False)
 
     descripcion = Column(Text, nullable=False)

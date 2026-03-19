@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from app.models.ticket import Ticket
 from app.schemas.ticket import TicketUpdateEstado, TicketUpdateResponsable
 from app.services.ticket_code_service import generar_ticket_codigo
+from app.utils.constants import PRODUCTOS_VALIDOS
 
 
 def crear_ticket(
@@ -11,8 +12,9 @@ def crear_ticket(
     nombre_reportante: str,
     correo_reportante: str,
     comercio: str,
+    nit: str,
     titulo_error: str,
-    categoria: str,
+    producto: str,
     prioridad: str,
     descripcion: str,
     imagen_url: str | None = None,
@@ -27,11 +29,17 @@ def crear_ticket(
     if not comercio or not comercio.strip():
         raise HTTPException(status_code=400, detail="El comercio es obligatorio")
 
+    if not nit or not nit.strip():
+        raise HTTPException(status_code=400, detail="El NIT es obligatorio")
+
     if not titulo_error or not titulo_error.strip():
         raise HTTPException(status_code=400, detail="El título del error es obligatorio")
 
-    if not categoria or not categoria.strip():
-        raise HTTPException(status_code=400, detail="La categoría es obligatoria")
+    if not producto or not producto.strip():
+        raise HTTPException(status_code=400, detail="El producto es obligatorio")
+
+    if producto.strip() not in PRODUCTOS_VALIDOS:
+        raise HTTPException(status_code=400, detail="Producto no válido")
 
     if not prioridad or not prioridad.strip():
         raise HTTPException(status_code=400, detail="La prioridad es obligatoria")
@@ -43,8 +51,9 @@ def crear_ticket(
         nombre_reportante=nombre_reportante.strip(),
         correo_reportante=correo_reportante.strip(),
         comercio=comercio.strip(),
+        nit=nit.strip(),
         titulo_error=titulo_error.strip(),
-        categoria=categoria.strip(),
+        producto=producto.strip(),
         prioridad=prioridad.strip(),
         descripcion=descripcion.strip(),
         imagen_url=imagen_url,

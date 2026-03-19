@@ -21,8 +21,9 @@ class TicketResponse(BaseModel):
     nombre_reportante: str
     correo_reportante: EmailStr
     comercio: str
+    nit: str
     titulo_error: str
-    categoria: str
+    producto: str
     prioridad: str
     descripcion: str
     imagen_url: Optional[str]
