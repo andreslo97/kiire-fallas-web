@@ -10,67 +10,47 @@
   <div class="container">
     <header class="header">
       <h1>Kiire Fallas</h1>
-      <p>Gestión de fallas e incidentes operativos</p>
+      <p>Gestión básica de tickets</p>
       <p><a href="./admin.html">Ir a administración</a></p>
     </header>
 
     <section class="card">
-      <h2 class="section-title">Crear ticket</h2>
-      <p class="section-subtitle">
-        Registra la falla con la mayor claridad posible para facilitar su seguimiento y solución.
-      </p>
-
+      <h2>Crear ticket</h2>
       <form id="ticketForm" class="form-grid">
         <div class="form-group">
           <label for="nombre_reportante">Nombre del reportante</label>
-          <input
-            type="text"
-            id="nombre_reportante"
-            placeholder="Ej. Juan Andrés Loaiza"
-            required
-          />
+          <input type="text" id="nombre_reportante" required />
         </div>
 
         <div class="form-group">
           <label for="correo_reportante">Correo del reportante</label>
-          <input
-            type="email"
-            id="correo_reportante"
-            placeholder="correo@empresa.com"
-            required
-          />
+          <input type="email" id="correo_reportante" required />
         </div>
 
         <div class="form-group">
           <label for="comercio">Comercio</label>
-          <input
-            type="text"
-            id="comercio"
-            placeholder="Nombre del comercio afectado"
-            required
-          />
+          <input type="text" id="comercio" required />
+        </div>
+
+        <div class="form-group">
+          <label for="nit">NIT</label>
+          <input type="text" id="nit" required />
         </div>
 
         <div class="form-group">
           <label for="titulo_error">Título del error</label>
-          <input
-            type="text"
-            id="titulo_error"
-            maxlength="100"
-            placeholder="Resume el problema en pocas palabras"
-            required
-          />
-          <small class="form-help">Usa un título corto y claro.</small>
+          <input type="text" id="titulo_error" maxlength="100" required />
         </div>
 
         <div class="form-group">
-          <label for="categoria">Categoría</label>
-          <input
-            type="text"
-            id="categoria"
-            placeholder="Ej. Pagos, login, reportería"
-            required
-          />
+          <label for="producto">Producto</label>
+          <select id="producto" required>
+            <option value="">Seleccione</option>
+            <option value="Minidatáfono">Minidatáfono</option>
+            <option value="Kiirepro">Kiirepro</option>
+            <option value="Recibe pagos con tu cel">Recibe pagos con tu cel</option>
+            <option value="Link de pagos">Link de pagos</option>
+          </select>
         </div>
 
         <div class="form-group">
@@ -86,18 +66,12 @@
 
         <div class="form-group full-width">
           <label for="descripcion">Descripción</label>
-          <textarea
-            id="descripcion"
-            rows="4"
-            placeholder="Describe qué ocurrió, cuándo ocurrió y cómo se puede reproducir el error."
-            required
-          ></textarea>
+          <textarea id="descripcion" rows="4" required></textarea>
         </div>
 
-        <div class="form-group full-width">
+        <div class="form-group">
           <label for="imagen">Adjuntar imagen</label>
           <input type="file" id="imagen" accept="image/*" />
-          <small class="form-help">Adjunta una captura si ayuda a entender mejor la falla.</small>
         </div>
 
         <div class="form-actions full-width">
@@ -110,21 +84,8 @@
 
     <section class="card">
       <div class="section-header">
-        <div>
-          <h2 class="section-title">Tickets</h2>
-          <p class="section-subtitle">Consulta y haz seguimiento a los casos registrados.</p>
-        </div>
-
-        <div style="display: flex; gap: 10px;">
-          <input
-            type="text"
-            id="filtroCodigo"
-            placeholder="Buscar por código..."
-            style="padding: 8px 12px; border-radius: 10px; border: 1px solid #d1d5db;"
-          />
-
-          <button id="btnRecargar" type="button">Recargar</button>
-        </div>
+        <h2>Tickets</h2>
+        <button id="btnRecargar">Recargar</button>
       </div>
 
       <div class="table-wrapper">
@@ -134,7 +95,9 @@
               <th>ID</th>
               <th>Código</th>
               <th>Comercio</th>
+              <th>NIT</th>
               <th>Título</th>
+              <th>Producto</th>
               <th>Prioridad</th>
               <th>Responsable</th>
               <th>Correo responsable</th>
