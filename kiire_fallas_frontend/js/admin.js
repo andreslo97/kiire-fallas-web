@@ -31,7 +31,6 @@ adminForm.addEventListener("submit", async (event) => {
   const ticketId = document.getElementById("ticketId").value.trim();
   const responsable = document.getElementById("nuevoResponsable").value.trim();
   const correo_responsable = document.getElementById("nuevoCorreoResponsable").value.trim();
-  const observacion = document.getElementById("observacion").value.trim();
 
   try {
     const response = await fetch(`${API_URL}/tickets/${ticketId}/responsable`, {
@@ -41,8 +40,7 @@ adminForm.addEventListener("submit", async (event) => {
       },
       body: JSON.stringify({
         responsable,
-        correo_responsable,
-        observacion
+        correo_responsable
       })
     });
 
