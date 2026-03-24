@@ -179,7 +179,8 @@ def cerrar_ticket_endpoint(
     <p><strong>Título:</strong> {ticket_actualizado.titulo_error}</p>
     <p><strong>Producto:</strong> {ticket_actualizado.producto}</p>
     <p><strong>Estado:</strong> {ticket_actualizado.estado}</p>
-    <p><strong>Descripción actualizada:</strong> {ticket_actualizado.descripcion}</p>
+    <p><strong>Descripción inicial:</strong> {ticket_actualizado.descripcion}</p>
+    <p><strong>Observación de cierre:</strong> {ticket_actualizado.observacion}</p>
     """
 
     try:

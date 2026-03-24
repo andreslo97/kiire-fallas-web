@@ -14,7 +14,7 @@ class TicketUpdateResponsable(BaseModel):
 
 
 class TicketCerrarCaso(BaseModel):
-    descripcion: str = Field(..., min_length=1)
+    observacion: str = Field(..., min_length=1)
 
 
 class TicketResponse(BaseModel):

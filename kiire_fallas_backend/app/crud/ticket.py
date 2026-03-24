@@ -98,7 +98,7 @@ def actualizar_responsable(db: Session, ticket: Ticket, data: TicketUpdateRespon
 
 
 def cerrar_ticket(db: Session, ticket: Ticket, data: TicketCerrarCaso):
-    ticket.descripcion = data.descripcion.strip()
+    ticket.observacion = data.observacion.strip()
     ticket.estado = "Cerrado"
     db.commit()
     db.refresh(ticket)

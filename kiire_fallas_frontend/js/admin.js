@@ -88,7 +88,7 @@ adminCierreForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const ticketId = document.getElementById("ticketIdCierre").value.trim();
-  const descripcion = document.getElementById("nuevaDescripcionCierre").value.trim();
+  const observacion = document.getElementById("nuevaObservacionCierre").value.trim();
 
   try {
     const response = await fetch(`${API_URL}/tickets/${ticketId}/cerrar`, {
@@ -97,7 +97,7 @@ adminCierreForm.addEventListener("submit", async (event) => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        descripcion
+        observacion
       })
     });
 
