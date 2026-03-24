@@ -8,11 +8,13 @@ from app.crud.ticket import (
     obtener_ticket_por_id,
     actualizar_estado,
     actualizar_responsable,
+    cerrar_ticket,
 )
 from app.schemas.ticket import (
     TicketResponse,
     TicketUpdateEstado,
     TicketUpdateResponsable,
+    TicketCerrarCaso,
 )
 from app.services.email_service import enviar_correo
 from app.services.storage_service import subir_imagen_ticket
@@ -151,5 +153,39 @@ def actualizar_responsable_endpoint(
             print("Correo enviado correctamente:", resultado_email)
         except Exception as e:
             print("Error enviando correo:", str(e))
+
+    return ticket_actualizado
+
+
+@router.put("/{ticket_id}/cerrar", response_model=TicketResponse)
+def cerrar_ticket_endpoint(
+    ticket_id: int,
+    data: TicketCerrarCaso,
+    db: Session = Depends(get_db),
+):
+    ticket = obtener_ticket_por_id(db, ticket_id)
+
+    if not ticket:
+        raise HTTPException(status_code=404, detail="Ticket no encontrado")
+
+    ticket_actualizado = cerrar_ticket(db, ticket, data)
+
+    asunto = f"Tu caso fue cerrado: {ticket_actualizado.ticket_codigo}"
+    html = f"""
+    <h2>Tu caso ha sido cerrado</h2>
+    <p><strong>Código del ticket:</strong> {ticket_actualizado.ticket_codigo}</p>
+    <p><strong>Comercio:</strong> {ticket_actualizado.comercio}</p>
+    <p><strong>NIT:</strong> {ticket_actualizado.nit}</p>
+    <p><strong>Título:</strong> {ticket_actualizado.titulo_error}</p>
+    <p><strong>Producto:</strong> {ticket_actualizado.producto}</p>
+    <p><strong>Estado:</strong> {ticket_actualizado.estado}</p>
+    <p><strong>Descripción actualizada:</strong> {ticket_actualizado.descripcion}</p>
+    """
+
+    try:
+        resultado_email = enviar_correo(ticket_actualizado.correo_reportante, asunto, html)
+        print("Correo enviado correctamente:", resultado_email)
+    except Exception as e:
+        print("Error enviando correo:", str(e))
 
     return ticket_actualizado

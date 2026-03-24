@@ -11,7 +11,10 @@ class TicketUpdateEstado(BaseModel):
 class TicketUpdateResponsable(BaseModel):
     responsable: str = Field(..., max_length=100)
     correo_responsable: EmailStr
-    observacion: Optional[str] = None
+
+
+class TicketCerrarCaso(BaseModel):
+    descripcion: str = Field(..., min_length=1)
 
 
 class TicketResponse(BaseModel):
@@ -22,9 +25,9 @@ class TicketResponse(BaseModel):
     nombre_reportante: str
     correo_reportante: EmailStr
     comercio: str
-    nit: str
+    nit: Optional[str]
     titulo_error: str
-    producto: str
+    producto: Optional[str]
     prioridad: str
     descripcion: str
     imagen_url: Optional[str]

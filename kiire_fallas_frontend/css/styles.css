@@ -601,3 +601,44 @@ thead th {
 .filter-group {
   max-width: 320px;
 }
+
+.admin-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.admin-tab {
+  background: #1e1b4b;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.admin-tab.active {
+  background: #22c55e;
+  color: #111827;
+}
+
+.admin-section h3 {
+  margin-bottom: 16px;
+}
+
+.detail-card {
+  margin-top: 20px;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 20px;
+}
+
+@media (max-width: 768px) {
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+}

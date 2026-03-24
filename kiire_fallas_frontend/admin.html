@@ -10,7 +10,7 @@
   <div class="container">
     <header class="header">
       <h1>Kiire Fallas - Administración</h1>
-      <p>Gestión interna de responsables</p>
+      <p>Gestión interna de tickets</p>
     </header>
 
     <section class="card" id="loginCard">
@@ -28,29 +28,99 @@
     </section>
 
     <section class="card" id="adminPanel" style="display: none;">
-      <h2>Actualizar responsable</h2>
-      <form id="adminForm" class="form-grid">
-        <div class="form-group">
-          <label for="ticketId">ID del ticket</label>
-          <input type="number" id="ticketId" required />
-        </div>
+      <div class="section-header">
+        <h2>Panel administrativo</h2>
+      </div>
 
-        <div class="form-group">
-          <label for="nuevoResponsable">Empleado responsable</label>
-          <input type="text" id="nuevoResponsable" required />
-        </div>
+      <div class="admin-tabs">
+        <button type="button" class="admin-tab active" data-target="panelResponsable">Cambio de responsable</button>
+        <button type="button" class="admin-tab" data-target="panelCierre">Cierre de casos</button>
+        <button type="button" class="admin-tab" data-target="panelConsulta">Visualización por ID</button>
+      </div>
 
-        <div class="form-group full-width">
-          <label for="nuevoCorreoResponsable">Correo del responsable</label>
-          <input type="email" id="nuevoCorreoResponsable" required />
-        </div>
+      <div id="panelResponsable" class="admin-section active">
+        <h3>Actualizar responsable</h3>
+        <form id="adminResponsableForm" class="form-grid">
+          <div class="form-group">
+            <label for="ticketIdResponsable">ID del ticket</label>
+            <input type="number" id="ticketIdResponsable" required />
+          </div>
 
-        <div class="form-actions full-width">
-          <button type="submit">Guardar y notificar</button>
-        </div>
-      </form>
+          <div class="form-group">
+            <label for="nuevoResponsable">Empleado responsable</label>
+            <input type="text" id="nuevoResponsable" required />
+          </div>
 
-      <div id="adminMensaje" class="message"></div>
+          <div class="form-group full-width">
+            <label for="nuevoCorreoResponsable">Correo del responsable</label>
+            <input type="email" id="nuevoCorreoResponsable" required />
+          </div>
+
+          <div class="form-actions full-width">
+            <button type="submit">Guardar y notificar</button>
+          </div>
+        </form>
+
+        <div id="adminResponsableMensaje" class="message"></div>
+      </div>
+
+      <div id="panelCierre" class="admin-section" style="display: none;">
+        <h3>Cerrar caso</h3>
+        <form id="adminCierreForm" class="form-grid">
+          <div class="form-group">
+            <label for="ticketIdCierre">ID del ticket</label>
+            <input type="number" id="ticketIdCierre" required />
+          </div>
+
+          <div class="form-group full-width">
+            <label for="nuevaDescripcionCierre">Nueva descripción</label>
+            <textarea id="nuevaDescripcionCierre" rows="4" required></textarea>
+          </div>
+
+          <div class="form-actions full-width">
+            <button type="submit">Cerrar caso y notificar</button>
+          </div>
+        </form>
+
+        <div id="adminCierreMensaje" class="message"></div>
+      </div>
+
+      <div id="panelConsulta" class="admin-section" style="display: none;">
+        <h3>Visualización detallada por ID</h3>
+        <form id="adminConsultaForm" class="form-grid">
+          <div class="form-group">
+            <label for="ticketIdConsulta">ID del ticket</label>
+            <input type="number" id="ticketIdConsulta" required />
+          </div>
+
+          <div class="form-actions">
+            <button type="submit">Buscar</button>
+          </div>
+        </form>
+
+        <div id="adminConsultaMensaje" class="message"></div>
+
+        <div id="detalleTicket" class="card detail-card" style="display: none;">
+          <h3>Detalle del ticket</h3>
+          <div class="detail-grid">
+            <div><strong>ID:</strong> <span id="d_id"></span></div>
+            <div><strong>Código:</strong> <span id="d_ticket_codigo"></span></div>
+            <div><strong>Nombre reportante:</strong> <span id="d_nombre_reportante"></span></div>
+            <div><strong>Correo reportante:</strong> <span id="d_correo_reportante"></span></div>
+            <div><strong>Comercio:</strong> <span id="d_comercio"></span></div>
+            <div><strong>Título error:</strong> <span id="d_titulo_error"></span></div>
+            <div><strong>Producto:</strong> <span id="d_producto"></span></div>
+            <div><strong>Prioridad:</strong> <span id="d_prioridad"></span></div>
+            <div><strong>Descripción:</strong> <span id="d_descripcion"></span></div>
+            <div><strong>Imagen:</strong> <span id="d_imagen_url"></span></div>
+            <div><strong>Responsable:</strong> <span id="d_responsable"></span></div>
+            <div><strong>Correo responsable:</strong> <span id="d_correo_responsable"></span></div>
+            <div><strong>Estado:</strong> <span id="d_estado"></span></div>
+            <div><strong>Observación:</strong> <span id="d_observacion"></span></div>
+            <div><strong>NIT:</strong> <span id="d_nit"></span></div>
+          </div>
+        </div>
+      </div>
     </section>
   </div>
 

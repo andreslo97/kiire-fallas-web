@@ -2,7 +2,7 @@ from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
 from app.models.ticket import Ticket
-from app.schemas.ticket import TicketUpdateEstado, TicketUpdateResponsable
+from app.schemas.ticket import TicketUpdateEstado, TicketUpdateResponsable, TicketCerrarCaso
 from app.services.ticket_code_service import generar_ticket_codigo
 from app.utils.constants import PRODUCTOS_VALIDOS
 
@@ -92,7 +92,14 @@ def actualizar_estado(db: Session, ticket: Ticket, data: TicketUpdateEstado):
 def actualizar_responsable(db: Session, ticket: Ticket, data: TicketUpdateResponsable):
     ticket.responsable = data.responsable
     ticket.correo_responsable = data.correo_responsable
+    db.commit()
+    db.refresh(ticket)
+    return ticket
 
+
+def cerrar_ticket(db: Session, ticket: Ticket, data: TicketCerrarCaso):
+    ticket.descripcion = data.descripcion.strip()
+    ticket.estado = "Cerrado"
     db.commit()
     db.refresh(ticket)
     return ticket
